@@ -1,0 +1,42 @@
+<%= form_with model: [list, item], local: true, html: { class: "space-y-8 divide-gray-200" } do |form| %>
+    <div class="space-y-8 divide-y divide-gray-200">
+        <div>
+            <% if item.new_record? %>
+                <h3 class="text-lg font-medium leading-6 text-gray-900">Nova Tarefa</h3>
+                <p class="mt-1 text-sm text-gray-500">Este formúlario, cria uma nova tarefa</p>
+            <% else %>
+                <h3 class="text-lg font-medium leading-6 text-gray-900">Alterar Tarefa</h3>
+                <p class="mt-1 text-sm text-gray-500">Este formúlario, altera uma tarefa já criada por esse usuário</p>
+            <% end %>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+            <div class="sm:col-span-6 pt-1 pb-0.5">
+                <%= form.label :nome_da_tarefa, class: "block text-sm font-medium text-gray-700" %>
+                <div class="mt-1">
+                    <%= form.text_field :title, class: "block w-full rounded-md border border-gray-300 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" %>
+                </div>
+            </div>
+        </div>      
+        
+        <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+            <div class="sm:col-span-6 pt-1 pb-0.5">
+                <%= form.label :descrição_da_tarefa, class: "block text-sm font-medium text-gray-700" %>
+                <div class="mt-1">
+                    <%= form.text_area :description, class: "block w-full rounded-md border border-gray-300 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" %>
+                </div>
+            </div>
+        </div>                     
+    </div>
+
+    <div class="">
+        <div class="flex justify-end pb-2">
+            <%= link_to "Cancelar", board_path(list.board_id), class: "cursor-pointer rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-black shadow-sm hover:bg-red-500 hover:text-white focus:outline-none focus-ring-2 focus:ring-indigo-500 focus:ring-offset-2" %>
+            <% if item.new_record? %>
+                <%= form.submit "Criar Tarefa", class: "cursor-pointer ml-3 inline-flex justify-center rounded-md border border-transparent bg-sky-500 py-2 px-4 text-sm font-mediu text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2" %>
+            <% else %>
+                <%= form.submit "Salvar Alterações", class: "cursor-pointer ml-3 inline-flex justify-center rounded-md border border-transparent bg-green-600 py-2 px-4 text-sm font-mediu text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2" %>
+            <% end %>
+        </div>
+    </div>
+<% end %>

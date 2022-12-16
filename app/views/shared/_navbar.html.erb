@@ -1,0 +1,61 @@
+<nav class="bg-white shadow">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 justify-between">
+            <div class="flex">
+                <div class="-ml-2 mr-2 flex items-center md:hidden">
+                    <button type="button" class="inline-flex items-center justify-center roundend-md p-2 text-gray-400 hover:bg-gray-100 hover:text">
+                        <span class="sr-only">Open main menu</span>
+                        <!--Heroicon bars-3-->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                        <!--Heroicon x-mark-->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div> 
+                <div class="flex flex-shrink-0 items-center">
+                    <%= link_to root_path do %>
+                        <%= image_tag "order-task-logo.jpg", class: "block h-16 w-auto py-0.5" %>
+                    <% end %>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:space-x-8">
+                    <% if user_signed_in? %>
+                        <%= link_to "Home", root_path, class: "inline-flex items-center border-b-2 border-transparent #{ "border-indigo-500 text-blue-700" if controller_name == "dashboard" } hover:border-blue-300 hover:bg-sky-100 hover:text-black px-1 pt-1 text-sm font-medium text-gray-500" %>
+                        <%= link_to "Deslogar", destroy_user_session_path, data: { "turbo-method": :delete }, class: "inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-blue-300 hover:bg-sky-100 hover:text-black" %> 
+                    <% end %>
+                </div>
+            </div>
+            <div class="flex items-center">
+                <% if user_signed_in? %>
+                    <div class="flex-shrink-0">
+                        <% if controller_name == "boards" && action_name == "show" %>
+                            <%= link_to new_board_list_path(@board), class: "relative inline-flex items-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-sm text-white shadow-sm hover:bg-blue-700" do %>      
+                                <!--Heroicon mini-plus-->
+                                <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                                </svg>
+                                <span class="-ml-1">Nova Lista de Tarefas</span>
+                            <% end %>
+                        <% elsif controller_name == "lists"%>    
+                        <% elsif %>
+                            <%= link_to new_board_path, class: "relative inline-flex items-center rounded-md border border-transparent bg-sky-500 px-4 py-2 text-sm text-white shadow-sm hover:bg-blue-700" do %>      
+                                <!--Heroicon mini-plus-->
+                                <svg class="-ml-1 mr-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" aria-hidden="true" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                                </svg>
+                                <span class="-ml-1">Novo Quadro de Tarefas</span>
+                            <% end %>
+                        <% end %>
+                    </div>
+                <% else %>
+                    <div class="ml-4 flex flex-shrink-0 items-center">
+                        <%= link_to "Cadastre-se", new_user_registration_path, class: "mr-3 bg-green-500 text-white items-center rounded-md border border-transparent tracking-wide px-4 py-2 hover:bg-green-700" %>
+                        <%= link_to "Logar", new_user_session_path, class: "bg-blue-500 text-white items-center rounded-md border border-transparent tracking-wide px-4 py-2 hover:bg-blue-700" %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>          
+</nav>
